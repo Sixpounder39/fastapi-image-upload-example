@@ -9,8 +9,10 @@ def enviar_imagen_a_api(ruta_imagen, modo="deteccion"):
     archivos = {"imagen": open(ruta_imagen, "rb")}
     params = {"modo": modo}
     
+    # Enviamos la imagen a la API
     respuesta = requests.post(url, files=archivos, params=params)
     
+    # Verificamos la respuesta de la API
     if respuesta.status_code == 200:
         print("Respuesta de la API:")
         print(respuesta.json())
@@ -18,6 +20,6 @@ def enviar_imagen_a_api(ruta_imagen, modo="deteccion"):
         print(f"Error {respuesta.status_code}: {respuesta.text}")
 
 if __name__ == "__main__":
-    # Cambia aquí la ruta a la imagen que quieres enviar
+    # Cambia aquí la ruta a la imagen que quieres enviar, en mi caso es una imagen de ejemplo
     ruta = os.path.join(directorio_actual, "imagen_ejemplo.jpeg")
     enviar_imagen_a_api(ruta)
