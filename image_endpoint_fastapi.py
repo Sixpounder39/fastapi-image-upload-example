@@ -60,8 +60,7 @@ async def procesar_imagen_endpoint(
     # Ejecutamos el procesamiento de forma asíncrona, controlando concurrencia con semáforo
     async with semaforo:
         # Ejecutamos el procesamiento en un hilo aparte para no bloquear el event loop
-        loop = asyncio.get_event_loop()
-        # `run_in_executor(None, func, arg)` usa el ThreadPoolExecutor por defecto (None)
+        loop = asyncio.get_running_loop() # actualiza el event loop actual
         # Ideal para funciones que hacen I/O o son bloqueantes (como procesar_imagen)
         resultado = await loop.run_in_executor(None, procesar_imagen, temp_path)
 
